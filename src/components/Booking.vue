@@ -2,6 +2,8 @@
   <div
       v-if="this.isBookingActive()"
       :class="bookingClass"
+      @mouseover="isHover = true"
+      @mouseout="isHover = false"
   >
     <router-link
         v-text="booking.customerName"
@@ -15,7 +17,7 @@
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 
-import { mapState } from 'vuex';
+import {mapState} from 'vuex';
 
 dayjs.extend(isBetween);
 
@@ -31,15 +33,21 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      isHover: false,
+    };
+  },
   computed: {
     ...mapState('booking', [
-        'selected',
+      'selected',
     ]),
     bookingClass() {
       return {
         'booking__start': this.isBookingStarting,
         'booking__end': this.isBookingEnding,
-        'bg-gray-50': true,
+        'bg-gray-300': this.isHover,
+        'bg-gray-50': !this.isHover,
       };
     },
     routerLink() {
