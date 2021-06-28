@@ -1,26 +1,32 @@
 <template>
-  <div>
+  <div
+      class="md:container md:mx-auto"
+  >
     <Autocomplete
         @user-select="onSelect"
     />
-    <div
-        @click="lastWeek()"
-    >
-      last
+    <div class="inline-flex">
+      <button
+          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
+          @click="lastWeek()"
+      >
+        Prev
+      </button>
+      <button
+          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r"
+          @click="nextWeek()"
+      >
+        Next
+      </button>
     </div>
     <div
-        @click="nextWeek()"
-    >
-      next
-    </div>
-    <div
-        class="grid grid-cols-1 md:grid-cols-7"
+        class="grid grid-cols-1 md:grid-cols-7 p-3"
     >
       <div
           v-for="(day, key) in weekData"
           :key="key"
       >
-        <CalendarData :date="day" />
+        <CalendarData :date="day"/>
       </div>
     </div>
   </div>
@@ -31,7 +37,7 @@
 import dayjs from 'dayjs';
 import Autocomplete from './Autocomplete';
 import CalendarData from "./CalendarData";
-import { mapActions, mapState } from 'vuex';
+import {mapActions, mapState} from 'vuex';
 
 export default {
   name: "Calendar",
@@ -46,7 +52,7 @@ export default {
   },
   computed: {
     ...mapState('booking', [
-        'initData'
+      'initData'
     ]),
     weekData() {
       const currentDay = this.dateToSelect;
@@ -65,7 +71,7 @@ export default {
       while (weekData.length < 7) {
         const date = currentDay.add(++daysToAdd, 'day');
 
-        weekData.push({formatted: date.format('MMM ddd D'), timestamp: date.unix() * 1000 });
+        weekData.push({formatted: date.format('MMM ddd D'), timestamp: date.unix() * 1000});
       }
 
       return weekData;
@@ -79,8 +85,8 @@ export default {
   },
   methods: {
     ...mapActions('booking', [
-        'setInitData',
-        'setSelected'
+      'setInitData',
+      'setSelected'
     ]),
     lastWeek() {
       this.dateToSelect = this.dateToSelect.subtract(1, 'week');
@@ -89,7 +95,9 @@ export default {
       this.dateToSelect = this.dateToSelect.add(1, 'week');
     },
     onSelect(result) {
-      this.setSelected(result);
+      const station = this.initData.find((stations) => stations.name === result);
+
+      this.setSelected(station.id);
     },
   }
 }

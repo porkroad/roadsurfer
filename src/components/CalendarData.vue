@@ -3,7 +3,7 @@
     <div v-text="date.formatted"></div>
     <div v-if="this.getSelectedBookings">
       <Booking
-          v-for="(booking, key) in this.getSelectedBookings.bookings"
+          v-for="(booking, key) in this.getSelectedBookings"
           :key="key"
           :booking="booking"
           :date="date"
@@ -35,20 +35,6 @@ export default {
       'getSelectedBookings',
     ]),
   },
-  methods: {
-    async stationData() {
-      const data = await fetch('https://605c94c36d85de00170da8b4.mockapi.io/stations');
-      const jsonData = await data.json();
-
-      console.log(jsonData);
-      return jsonData.find((data) => data.name === this.selected);
-    },
-    getBooking(timestamp) {
-      return {
-        timestamp,
-      };
-    }
-  }
 }
 </script>
 

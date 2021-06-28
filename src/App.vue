@@ -1,19 +1,15 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <Calendar />
+    <router-link to="/">Home</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import './assets/styles/tailwind.css';
-import Calendar from "./components/Calendar";
 
 export default {
   name: 'App',
-  components: {
-    Calendar,
-  }
 }
 </script>
 

@@ -3,13 +3,19 @@
       v-if="this.isBookingActive()"
       :class="bookingClass"
   >
-    {{ booking.customerName }}
+    <router-link
+        v-text="booking.customerName"
+        :to="routerLink"
+    >
+    </router-link>
   </div>
 </template>
 
 <script>
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
+
+import { mapState } from 'vuex';
 
 dayjs.extend(isBetween);
 
@@ -26,11 +32,17 @@ export default {
     },
   },
   computed: {
+    ...mapState('booking', [
+        'selected',
+    ]),
     bookingClass() {
       return {
         'booking__start': this.isBookingStarting,
         'booking__end': this.isBookingEnding,
       };
+    },
+    routerLink() {
+      return `/${this.selected}/${this.booking.id}`;
     },
     isBookingStarting() {
       const calendarData = new Date(this.date.timestamp);
