@@ -1,0 +1,7 @@
+const SET_INIT_DATA = 'SET_INIT_DATA';
+const SET_SELECTED = 'SET_SELECTED';
+
+export {
+    SET_INIT_DATA,
+    SET_SELECTED,
+};
