@@ -69,12 +69,14 @@ export default {
 }
 </script>
 
-<style scoped>
-.booking__start {
-  color: green;
-}
+<style lang="scss" scoped>
+.booking {
+  &__start {
+    color: green;
+  }
 
-.booking__end {
-  color: red;
+  &__end {
+    color: red;
+  }
 }
 </style>
