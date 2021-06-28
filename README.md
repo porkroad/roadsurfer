@@ -30,5 +30,8 @@ I used dayjs just for simplicity.
 
 Since we're storing the initial request, i decided to not use the booking endpoint (```https://605c94c36d85de00170da8b4.mockapi.io/stations/{station-id}/{booking-id}```).
 I can not see any purpose to use it. If we can't store the initial request for whatever-reason, i'd query the endpoint inside the BookingDetail-component with the given parameters from ```this.$route.params```.
+I also implemented a debounce on the search field to not trigger a "too many requests" error.
 
 If we would have translations, i'd also use [Vue I18n](https://kazupon.github.io/vue-i18n/) and replace every hardcoded string with a translation.
+
+I'd also would use conventional-commits with conventional-changelogs (auto generate changelog entries based on commit message).

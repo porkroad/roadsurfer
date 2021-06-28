@@ -39,6 +39,7 @@ export default {
       return {
         'booking__start': this.isBookingStarting,
         'booking__end': this.isBookingEnding,
+        'bg-gray-50': true,
       };
     },
     routerLink() {
