@@ -1,4 +1,4 @@
 module.exports = {
-    // publicPath: '/roadsurfer/',
+    publicPath: '/roadsurfer/',
 }
 
