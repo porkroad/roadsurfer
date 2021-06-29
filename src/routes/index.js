@@ -7,8 +7,9 @@ import BookingDetail from '../components/detail/BookingDetail';
 Vue.use(VueRouter);
 
 const routes = [
-    { path: '/', component: Calendar },
-    { path: '/:stationId/:id', component: BookingDetail }
+    {path: '/', redirect: '/roadsurfer'},
+    { path: '/roadsurfer', component: Calendar },
+    { path: '/roadsurfer/:stationId/:id', component: BookingDetail }
 ];
 
 export default  new VueRouter({

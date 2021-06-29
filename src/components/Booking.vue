@@ -51,7 +51,7 @@ export default {
       };
     },
     routerLink() {
-      return `/${this.selected}/${this.booking.id}`;
+      return `/roadsurfer/${this.selected}/${this.booking.id}`;
     },
     isBookingStarting() {
       const calendarData = new Date(this.date.timestamp);
