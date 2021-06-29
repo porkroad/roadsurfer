@@ -7,13 +7,13 @@
     />
     <div class="inline-flex">
       <button
-          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
+          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l button-last-week"
           @click="lastWeek()"
       >
         Prev
       </button>
       <button
-          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r"
+          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r button-next-week"
           @click="nextWeek()"
       >
         Next
@@ -58,10 +58,13 @@ export default {
       const currentDay = this.dateToSelect;
       const weekData = [];
       if (currentDay.day() !== 0) {
-        while (currentDay.subtract(1, 'day').day() !== 0) {
+        let currentDaySubtracted = currentDay.subtract(1, 'day').day();
+        while (currentDaySubtracted  !== 0) {
           const date = currentDay.subtract(1, 'day');
 
           weekData.push({formatted: date.format('MMM ddd D'), timestamp: date.unix() * 1000});
+
+          currentDaySubtracted--;
         }
       }
 
@@ -78,16 +81,18 @@ export default {
     },
   },
   async mounted() {
-    const data = await fetch('https://605c94c36d85de00170da8b4.mockapi.io/stations');
-    const initData = await data.json();
-
-    this.setInitData(initData);
+    await this.init();
   },
   methods: {
     ...mapActions('booking', [
       'setInitData',
       'setSelected'
     ]),
+    async init() {
+      const data = await fetch('https://605c94c36d85de00170da8b4.mockapi.io/stations');
+      const initData = await data.json();
+      this.setInitData(initData);
+    },
     lastWeek() {
       this.dateToSelect = this.dateToSelect.subtract(1, 'week');
     },
