@@ -1,4 +1,4 @@
-// from https://github.com/porkroad/roadsurfer/blob/master/deploy/deploy-to-gh-page.js
+// from https://blog.logrocket.com/build-deploy-vue-js-app-github-pages/
 /* eslint-disable no-console */
 const execa = require("execa");
 const fs = require("fs");
